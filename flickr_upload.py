@@ -16,7 +16,7 @@ def authenticate(api_key, api_secret):
         print('Go to the following URL: {0}'.format(authorize_url))
 
         # Get the verifier code from the user
-        verifier = str(input('Enter verifier code: '))
+        verifier = input('Enter verifier code: ')
 
         # Trade the request token for an access token
         flickr.get_access_token(verifier)
