@@ -37,8 +37,8 @@ def main():
     resize_images(images_path, resized_images_path, 1080)
 
     flickr = authenticate(flickr_api_key, flickr_api_secret)
-    images_list = [x for x in resized_images_path.iterdir() if x.is_file()]
-    for image in images_list:
+    images = [path for path in resized_images_path.iterdir() if path.is_file()]
+    for image in images:
         print('Uploading {}...'.format(image))
         rsp = upload_image(flickr, image)
 

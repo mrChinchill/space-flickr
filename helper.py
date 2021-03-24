@@ -21,9 +21,9 @@ def get_image_extension(url):
 
 
 def resize_images(source_path, target_path, max_size):
-    files_list = [x for x in source_path.iterdir() if x.is_file()]
+    files = [path for path in source_path.iterdir() if path.is_file()]
 
-    for file in files_list:
+    for file in files:
         new_file = target_path.joinpath(file.name).with_suffix('.jpg')
 
         image = Image.open(file)
