@@ -15,9 +15,9 @@ def get_hubble_image_links(image_id):
     response = requests.get(url)
     response.raise_for_status()
 
-    images_links = ['https:{}'.format(image_file['file_url']) for image_file in response.json()['image_files']]
+    image_links = ['https:{}'.format(image_file['file_url']) for image_file in response.json()['image_files']]
 
-    return images_links
+    return image_links
 
 
 def download_hubble_image(images_path, image_id):
