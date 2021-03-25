@@ -1,7 +1,8 @@
 #!/usr/bin/env python3
 
-import urllib3
+import logging
 import os
+import urllib3
 
 from dotenv import load_dotenv
 from fetch_hubble import fetch_hubble_collection
@@ -19,6 +20,13 @@ def main():
 
     urllib3.disable_warnings(urllib3.exceptions.InsecureRequestWarning)
 
+    logger = logging.getLogger(__name__)
+    logger.setLevel(logging.INFO)
+    handler = logging.StreamHandler()
+    formatter = logging.Formatter('%(levelname)s: %(message)s')
+    handler.setFormatter(formatter)
+    logger.addHandler(handler)
+
     root_path = Path(__file__).resolve().parent
 
     images_path = root_path.joinpath('images')
@@ -27,22 +35,22 @@ def main():
     resized_images_path = images_path.joinpath('resized')
     resized_images_path.mkdir(parents=True, exist_ok=True)
 
-    print('Downloading SpaceX images...')
+    logger.info('Downloading SpaceX images...')
     fetch_spacex_last_launch(images_path)
 
-    print('Downloading Hubble images...')
+    logger.info('Downloading Hubble images...')
     fetch_hubble_collection(images_path, 'stsci_gallery')
 
-    print('Resizing images...')
+    logger.info('Resizing images...')
     resize_and_convert_images(images_path, resized_images_path, 1080)
 
     flickr = authenticate(flickr_api_key, flickr_api_secret)
     images = [path for path in resized_images_path.iterdir() if path.is_file()]
     for image in images:
-        print('Uploading {}...'.format(image))
+        logger.info('Uploading to flickr {}'.format(image))
         rsp = upload_image(flickr, image)
 
-    print('Done\n')
+    logger.info('Done\n')
 
 
 if __name__ == '__main__':
