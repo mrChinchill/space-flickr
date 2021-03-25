@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 
 import requests
-import xml.etree.ElementTree as ElementTree
 
 from pathlib import Path
 from PIL import Image
@@ -30,7 +29,3 @@ def resize_and_convert_images(source_path, target_path, max_size):
         image.thumbnail((max_size, max_size))
         image = image.convert('RGB')
         image.save(new_file, format='JPEG')
-
-
-def et_to_str(root):
-    return ElementTree.tostring(root).decode('utf-8')
