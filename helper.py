@@ -20,7 +20,7 @@ def get_image_extension(url):
     return Path(urlparse(url).path).suffix
 
 
-def resize_images(source_path, target_path, max_size):
+def resize_and_convert_images(source_path, target_path, max_size):
     files = [path for path in source_path.iterdir() if path.is_file()]
 
     for file in files:

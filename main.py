@@ -8,7 +8,7 @@ from fetch_hubble import fetch_hubble_collection
 from fetch_spacex import fetch_spacex_last_launch
 from flickr_upload import authenticate
 from flickr_upload import upload_image
-from helper import resize_images
+from helper import resize_and_convert_images
 from pathlib import Path
 
 
@@ -34,7 +34,7 @@ def main():
     fetch_hubble_collection(images_path, 'stsci_gallery')
 
     print('Resizing images...')
-    resize_images(images_path, resized_images_path, 1080)
+    resize_and_convert_images(images_path, resized_images_path, 1080)
 
     flickr = authenticate(flickr_api_key, flickr_api_secret)
     images = [path for path in resized_images_path.iterdir() if path.is_file()]
