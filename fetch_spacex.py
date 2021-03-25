@@ -7,11 +7,11 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 
-spacex_base_url = 'https://api.spacexdata.com/v4'
+SPACEX_BASE_URL = 'https://api.spacexdata.com/v4'
 
 
 def get_last_spacex_launch_images_links():
-    url = '{}/launches'.format(spacex_base_url)
+    url = '{}/launches'.format(SPACEX_BASE_URL)
 
     response = requests.get(url)
     response.raise_for_status()

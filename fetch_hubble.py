@@ -6,11 +6,11 @@ from helper import download_image
 from helper import get_image_extension
 
 
-hubble_base_url = 'http://hubblesite.org/api/v3'
+HUBBLE_BASE_URL = 'http://hubblesite.org/api/v3'
 
 
 def get_hubble_image_links(image_id):
-    url = '{}/image/{}'.format(hubble_base_url, image_id)
+    url = '{}/image/{}'.format(HUBBLE_BASE_URL, image_id)
 
     response = requests.get(url)
     response.raise_for_status()
@@ -28,7 +28,7 @@ def download_hubble_image(images_path, image_id):
 
 
 def fetch_hubble_collection(images_path, collection_name):
-    url = '{}/images/{}'.format(hubble_base_url, collection_name)
+    url = '{}/images/{}'.format(HUBBLE_BASE_URL, collection_name)
     payload = {'page': 'all'}
 
     response = requests.get(url, params=payload)
