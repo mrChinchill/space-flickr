@@ -6,7 +6,7 @@ from helper import download_image
 from helper import get_image_extension
 
 
-HUBBLE_BASE_URL = 'http://hubblesite.org/api/v3'
+HUBBLE_BASE_URL = 'http://hubblesite.org/api/v2'
 
 
 def get_hubble_image_links(image_id):
